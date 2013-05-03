@@ -1,0 +1,34 @@
+@import "styles/bootstrap.less";
+
+html, body, div.viewport {
+	height: 100%;
+}
+
+@import "styles/editor.less";
+
+@import "styles/response.less";
+
+@import "http://yandex.st/highlightjs/7.3/styles/default.min.css";
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  // Focus state
+  &:focus {
+    border-color: @input-border;
+    outline: 0;
+    .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  }
+}

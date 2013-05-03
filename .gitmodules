@@ -1,0 +1,18 @@
+[submodule "inc/bootstrap"]
+	path = inc/bootstrap
+	url = https://github.com/twitter/bootstrap.git
+[submodule "inc/less.js"]
+	path = inc/less.js
+	url = https://github.com/cloudhead/less.js.git
+[submodule "inc/behave.js"]
+	path = inc/behave.js
+	url = https://github.com/jakiestfu/Behave.js.git
+[submodule "inc/underscore"]
+	path = inc/underscore
+	url = https://github.com/documentcloud/underscore.git
+[submodule "inc/backbone"]
+	path = inc/backbone
+	url = https://github.com/documentcloud/backbone.git
+[submodule "inc/jquery"]
+	path = inc/jquery
+	url = https://github.com/jquery/jquery.git
