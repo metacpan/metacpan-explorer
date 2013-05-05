@@ -53,7 +53,15 @@ define([
 			this.$label = this.$(".editor .label").hide();
 			this.$body = this.$("textarea");
 			this.$endpoint = this.$("input").typeahead({
-				source: ["/v0/file", "/v0/author", "/v0/release", "/v0/distribution", "/v0/module"]
+				source: [
+					"/v0/file",
+					"/v0/author",
+					"/v0/release",
+					"/v0/distribution",
+					"/v0/module",
+					"/v0/favorite",
+					"/v0/rating"
+				]
 			});
 			new Behave({
 				textarea: this.$("textarea").get(0),

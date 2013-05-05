@@ -1,5 +1,6 @@
 require.config({
   baseUrl: "app",
+  urlArgs: "bust=" + (new Date()).getTime(),
   shim: {
     underscore: {
       exports: '_'
@@ -35,22 +36,25 @@ requirejs([
   "view/viewport",
   "view/navbar",
   "view/request",
+  "view/Sidebar",
   "model/request",
   "model",
   "collection"],
-function   (Viewport, Navbar, RequestView, Request, Model, Collection) {
+function   (Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
     var viewport = new Viewport();
     $(document.body).replaceWith(viewport.render().el);
+    var request = new Request();
+    request.bind("all", function() {console.log(arguments)})
+    
+    var sidebar = new SidebarView({});
+    viewport.$el.append(sidebar.render().el);
+
     var navbar = new Navbar({
-      model: new Model({
-        title: "Title"
-      })
+      model: request
     });
     viewport.$el.append(navbar.render().el);
 
-    var request = new Request();
-    request.bind("change", function() {console.log(arguments)})
-
+    
     var requestView = new RequestView({
       model: request,
       collection: new Collection([{}])

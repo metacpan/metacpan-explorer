@@ -1,6 +1,6 @@
 define(["backbone"], function(Backbone) {
 
-	var Storage = function() {}
+	var Storage = function() {};
 	_.extend(Storage.prototype, Backbone.Events, {
 		request: function(options) {
 			options.url += "?access_token=62ac27f3962648d0e158992cbaa3cc3bd8562995";
@@ -15,7 +15,7 @@ define(["backbone"], function(Backbone) {
 				return {
 					body: res.files["body.json"] ? res.files["body.json"].content : null,
 					endpoint: res.files["endpoint.txt"].content
-				}
+				};
 			});
 		},
 		findAll: function() { throw "find not implemented in " + this },
@@ -28,14 +28,14 @@ define(["backbone"], function(Backbone) {
 					},
 					"response.json": {
 						content: model.get("response")
-					}
+					},
+					"body.json": model.get("body") ? {
+						content: model.get("body")
+					} : null
 				}
 			};
-			if(model.get("body"))
-				_.extend(gist.files, {"body.json": {
-						content: model.get("body")
-					}
-				});
+			//if(!model.id && !model.get("body"))
+			//	delete gist.files["body.json"];
 			return this.request({
 				url: "https://api.github.com/gists" + (model.id ? "/" + model.id : ""),
 				type: model.id ? "PATCH" : "POST",
@@ -48,6 +48,7 @@ define(["backbone"], function(Backbone) {
 		update: function() { return this.create.apply(this, arguments) },
 		destroy: function() { throw "destroy not implemented in " + this },
 		sync: function(method, model, options) {
+			model.trigger("load:start");
 			options = options || {};
 			var resp;
 			switch (method) {
@@ -56,6 +57,7 @@ define(["backbone"], function(Backbone) {
 			    case "update": resp = this.update(model, options); break;
 			    case "delete": resp = this.destroy(model, options); break;
 			}
+			resp.always(function() { model.trigger("load:end") });
 			return resp.fail(options.error || $.noop).done(options.success || $.noop);
 		}
 	});

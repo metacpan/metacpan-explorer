@@ -5,24 +5,22 @@
 	<script src="inc/less.js" type="text/javascript"></script>
 	<script data-main="app/app.js" src="inc/require.js"></script>
 	<script type="text/template" id="template-navbar">
-		<a class="navbar-brand" href="#"><%= model.title %></a>
-		<ul class="nav navbar-nav">
+		<div class="logo">
+			<div class="ul"></div>
+			<div class="ur"></div>
+			<div class="ll"></div>
+			<div class="lr"></div>
+		</div>
+		<a class="navbar-brand">MetaCPAN Explorer</a>
+		<ul class="nav navbar-nav pull-right">
 			<li><a href="https://github.com/CPAN-API/metacpan-explorer/issues">Issues</a></li>
 		</ul>
 	</script>
 	<script type="text/template" id="template-request">
-	<div class="endpoint container">
+	<div class="request-inner">
+	<div class="endpoint">
 		<form>
 			<div class="input-group">
-				<div class="input-group-btn">
-					<button class="btn dropdown-toggle" data-toggle="dropdown" type="button">Endpoint <span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li><a href="#">/v0/file</a></li>
-						<li><a href="#">/v0/release</a></li>
-						<li><a href="#">/v0/author</a></li>
-						<li><a href="#">/v0/distribution</a></li>
-					</ul>
-				</div>
 				<input type="text" autofocus="autofocus">
 				<span class="input-group-btn">
 			    <button class="btn" type="submit">Request</button>
@@ -38,6 +36,8 @@
 		<pre class="json">
 			<%= model.response || "" %>
 		</pre>
+	</div>
+
 	</div>
 	</script>
 </head>
