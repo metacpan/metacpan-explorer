@@ -17,6 +17,10 @@ require.config({
       deps: ["jquery"],
       exports: "jQuery.fn.typeahead"
     },
+    "bootstrap-tooltip": {
+      deps: ["jquery"],
+      exports: "jQuery.fn.tooltip"
+    },
     "sh": {
       exports: "hljs"
     }
@@ -27,6 +31,7 @@ require.config({
     backbone: "../inc/backbone",
     "bootstrap-typeahead": "../inc/bootstrap/js/bootstrap-typeahead",
     "bootstrap-dropdown": "../inc/bootstrap/js/bootstrap-dropdown",
+    "bootstrap-tooltip": "../inc/bootstrap/js/bootstrap-tooltip",
     "behave": "../inc/behave",
     "sh": "../inc/highlight"
   }

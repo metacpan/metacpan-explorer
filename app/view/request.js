@@ -4,7 +4,8 @@ define([
 	"behave",
 	"sh",
 	"bootstrap-dropdown",
-	"bootstrap-typeahead"
+	"bootstrap-typeahead",
+	"bootstrap-tooltip"
 ], function(View, ItemView, Behave, hljs) {
 	return View.extend({
 		name: "request",
@@ -18,6 +19,12 @@ define([
 					endpoint: this.$("input").val()
 				}).request();
 				return false;
+			},
+			"keydown textarea": function(e) {
+				if((e.keyCode || e.which) === 13 && e.shiftKey === true) {
+					this.$("form").submit();
+					return false;
+				}
 			},
 			"keyup textarea": "validateBody"
 		},
@@ -63,6 +70,7 @@ define([
 					"/v0/rating"
 				]
 			});
+			this.$("button").tooltip({ placement: "bottom", trigger: "hover", container: "body" });
 			new Behave({
 				textarea: this.$("textarea").get(0),
 				tabSize: 2
