@@ -1,0 +1,62 @@
+div.request {
+	position: absolute;
+	padding-left: 200px;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+
+	div.request-inner {
+		position: relative;
+		height: 100%;
+		//width: 100%;
+	}
+
+	div.editor, div.response {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		top: @navbar-height;
+		width: 50%;
+	}
+
+	div.editor {
+		.label {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}
+
+		textarea {
+			margin: 0;
+			height: 100%;
+			display: block;
+			position: absolute;
+			bottom: 0px;
+			top: 0px;
+			tab-size: 2;
+			font-family: @font-family-monospace;
+			border-radius: 0;
+			resize: none;
+		}
+	}
+
+	div.endpoint {
+		padding: 8px 90px 0 30px;
+	}
+}
+
+div.response {
+	right: 0px;
+	pre {
+		position: absolute;
+		bottom: 0px;
+		top: 0px;
+		width: 100%;
+		tab-size: 2;
+		margin: 0;
+		overflow: auto;
+		border-radius: 0;
+		border-left-width: 0;
+		white-space: pre;
+	}
+}
