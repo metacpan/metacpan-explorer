@@ -40,6 +40,18 @@
 
 	</div>
 	</script>
+	<script type="text/template" id="template-sidebar">
+		<ul class="nav">
+			<li class="nav-header">Curl</li>
+			<li class="input">
+				<input type="text" disabled="disabled" value="<%- model.curl %>" />
+			</li>
+			<li class="nav-header examples">Examples</li>
+		</ul>
+	</script>
+	<script type="text/template" id="template-list-item">
+	<a href="#/<%- model.id %>"><%- model.description || model.id %></a>
+	</script>
 </head>
 <body>
 </body>

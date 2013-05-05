@@ -6,6 +6,23 @@ define(["model", "store/gist"], function(Model, Store) {
 			body: null,
 			response: null
 		},
+		getCurl: function() {
+			var curl = "curl -XPOST api.metacpan.org" + this.get("endpoint");
+			if(this.get("body")) curl +=
+				" -d \"$(curl -s gist.github.com/metacpan/" + this.id + "/raw/body.json)\"";
+			return curl;
+		},
+		toJSON: function() {
+			var json = Model.prototype.toJSON.apply(this, arguments);
+			_.extend(json, { curl: this.getCurl() });
+			return json;
+		},
+		parse: function(res) {
+			return _.extend(res, {
+				body: res.files["body.json"] ? res.files["body.json"].content : null,
+				endpoint: res.files["endpoint.txt"].content
+			});
+		},
 		request: function(options) {
 			options = options || {};
 			var self = this;

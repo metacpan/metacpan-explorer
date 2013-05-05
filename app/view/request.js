@@ -1,12 +1,11 @@
 define([
 	"view",
-	"view/navbar-item",
 	"behave",
 	"sh",
 	"bootstrap-dropdown",
 	"bootstrap-typeahead",
 	"bootstrap-tooltip"
-], function(View, ItemView, Behave, hljs) {
+], function(View, Behave, hljs) {
 	return View.extend({
 		name: "request",
 		events: {

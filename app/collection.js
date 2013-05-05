@@ -31,6 +31,10 @@ define(["backbone"], function(Backbone) {
 		fetchAll: function() {
 			var self = this;
 			return $.when.apply($, this.invoke("fetch")).pipe(function(){return self});
+		},
+		sync: function(method, model, options) {
+			var store = this.store || this.model && this.model.prototype.store;
+			return store ? store.sync.apply(store, arguments) : $.when();
 		}
 	});
 });

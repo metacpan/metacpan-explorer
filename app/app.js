@@ -46,33 +46,43 @@ requirejs([
   "model",
   "collection"],
 function   (Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
-    var viewport = new Viewport();
-    $(document.body).replaceWith(viewport.render().el);
-    var request = new Request();
-    request.bind("all", function() {console.log(arguments)})
-    
-    var sidebar = new SidebarView({});
-    viewport.$el.append(sidebar.render().el);
 
-    var navbar = new Navbar({
-      model: request
+  Backbone.history.start()
+
+  var viewport = new Viewport();
+  $(document.body).replaceWith(viewport.render().el);
+
+  var request = new Request();
+
+  var examples = new Collection([request], {
+    model: Request
+  });
+  examples.fetch({ reset: true });
+
+
+  var sidebar = new SidebarView({
+    model: request,
+    collection: examples
+  });
+
+  var navbar = new Navbar({
+    model: request
+  });
+  viewport.$el.append(navbar.render().el);
+
+
+  var requestView = new RequestView({
+    model: request,
+    collection: new Collection([{}])
+  });
+  viewport.$el.append(requestView.render().el);viewport.$el.append(sidebar.render().el);
+
+
+  var id;
+  if(id = location.hash.replace(/^#?\/(\w+)$/, "$1")) {
+    request.id = id;
+    request.fetch().done(function() {
+      request.request({ gist: false })
     });
-    viewport.$el.append(navbar.render().el);
-
-    
-    var requestView = new RequestView({
-      model: request,
-      collection: new Collection([{}])
-    });
-    viewport.$el.append(requestView.render().el);
-
-    var id;
-    if(id = location.hash.replace(/^#?\/(\w+)$/, "$1")) {
-      request.id = id;
-      request.fetch().done(function() {
-        request.request({ gist: false })
-      });
-    }
-
-      
+  }    
 });

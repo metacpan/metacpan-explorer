@@ -11,17 +11,18 @@ define(["backbone"], function(Backbone) {
 				url: "https://api.github.com/gists/" + model.id,
 				context: this,
 				dataType: "json"
-			}).then(function(res) {
-				return {
-					body: res.files["body.json"] ? res.files["body.json"].content : null,
-					endpoint: res.files["endpoint.txt"].content
-				};
 			});
 		},
-		findAll: function() { throw "find not implemented in " + this },
+		findAll: function() {
+			return $.ajax({
+				url: "https://api.github.com/users/metacpan/gists",
+				context: this,
+				dataType: "json"
+			});
+		},
 		create: function(model, options) {
 			var gist = {
-				public: false,
+				public: true,
 				files: {
 					"endpoint.txt": {
 						content: model.get("endpoint")
@@ -34,8 +35,8 @@ define(["backbone"], function(Backbone) {
 					} : null
 				}
 			};
-			//if(!model.id && !model.get("body"))
-			//	delete gist.files["body.json"];
+			if(!model.id && !model.get("body"))
+				delete gist.files["body.json"];
 			return this.request({
 				url: "https://api.github.com/gists" + (model.id ? "/" + model.id : ""),
 				type: model.id ? "PATCH" : "POST",

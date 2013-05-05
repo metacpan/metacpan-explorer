@@ -1,4 +1,4 @@
-define(["view", "view/navbar-item"], function(View, ItemView) {
+define(["view"], function(View) {
 	return View.extend({
 		loading: 0,
 		loadingInterval: null,

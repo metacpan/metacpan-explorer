@@ -13,6 +13,10 @@ define(["backbone"], function(Backbone) {
 					{ "class": name }
 				);
 			}
+			if(options.model)
+				this.listenTo(options.model, "change:active", function(model, value) {
+					this.$el.toggleClass("active", value);
+				});
 			Backbone.View.apply(this, arguments);
 		},
 		triggerSelect: function() {
