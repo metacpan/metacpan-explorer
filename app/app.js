@@ -37,7 +37,7 @@ require.config({
   }
 });
 
-requirejs([
+define([
     "router",
     "view/viewport",
     "view/navbar",
@@ -52,30 +52,28 @@ requirejs([
     var viewport = new Viewport();
     $(document.body).replaceWith(viewport.render().el);
 
-    var request = new Request();
+    var request = new Request({ active: true });
 
     var examples = window.e = new Collection([request], {
       model: Request,
       comparator: "description"
     });
-    var sidebar = viewport.add(new SidebarView({ collection: examples }));
-    var navbar = viewport.add(new Navbar({ collection: examples }));
+    var sidebar = new SidebarView({ collection: examples });
+    var navbar = new Navbar({ collection: examples });
 
     var fetch = examples.fetch();
 
     viewport.$el.append(
       navbar.render().el,
-      sidebar.render().el
+      sidebar.render().el,
+      viewport.add(new RequestView({ model: request })).render().el
     );
 
     examples.bind("change:active", function(model, value) {
       if(!value) return;
-      if(viewport.requestView) viewport.requestView.remove();
-      viewport.requestView = viewport.add(new RequestView({ model: model }));
-      viewport.$el.append(viewport.requestView.render().el);
+      viewport.removeViews();
+      viewport.$el.append(viewport.add(new RequestView({ model: model })).render().el);
     });
-
-    request.set("active", true);
 
     router.on("route:load", function(id) {
       navbar.startLoading();

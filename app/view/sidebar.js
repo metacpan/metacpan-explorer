@@ -8,7 +8,10 @@ define(["view", "view/list-item"], function(View, ItemView) {
 		},
 		initialize: function() {
 			this.listenTo(this.collection, "sync", this.render);
-			this.listenTo(this.collection, "change:active", this.render);
+			this.listenTo(this.collection, "change:active", this.updateCurl);
+		},
+		updateCurl: function(model, value) {
+			this.$("input").val(value ? model.getCurl() : "");
 		},
 		render: function() {
 			var self = this;

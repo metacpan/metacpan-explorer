@@ -12,14 +12,7 @@
 			<div class="lr"></div>
 		</div>
 		<a class="navbar-brand">MetaCPAN Explorer</a>
-		<ul class="nav navbar-nav pull-right">
-			<li><a href="https://github.com/CPAN-API/metacpan-explorer/issues">Issues</a></li>
-		</ul>
-	</script>
-	<script type="text/template" id="template-request">
-	<div class="request-inner">
-	<div class="endpoint">
-		<form>
+		<form class="navbar-form">
 			<div class="input-group">
 				<input type="text" autofocus="autofocus" placeholder="Endpoint" value="<%- model.endpoint || "" %>">
 				<span class="input-group-btn">
@@ -27,7 +20,9 @@
 			  </span>
 			</div>
 		</form>
-	</div>
+	</script>
+	<script type="text/template" id="template-request">
+	<div class="request-inner">
 	<div class="editor">
 		<textarea placeholder="Request Body"><%- model.body || "" %></textarea>
 		<span class="label label-danger">Invalid JSON</span>

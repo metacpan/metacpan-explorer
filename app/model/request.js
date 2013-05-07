@@ -4,7 +4,8 @@ define(["model", "store/gist"], function(Model, Store) {
 		defaults: {
 			endpoint: null,
 			body: null,
-			response: null
+			response: null,
+			active: false
 		},
 		getCurl: function() {
 			if(!this.get("endpoint")) return "";

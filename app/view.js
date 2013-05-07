@@ -47,8 +47,8 @@ define(["backbone"], function(Backbone) {
 			this.removeViews();
 			var template = this.options.template || this.template;
 			options = _.extend({
-				model: this.model ? this.model.toJSON() : null,
-				collection: this.collection ? this.collection.toJSON() : null
+				model: this.model ? this.model.toJSON() : {},
+				collection: this.collection ? this.collection.toJSON() : []
 			}, options || {});
 			if(template) this.$el.html(template(options));
 			if(this.model) this.$el.toggleClass("active", this.model.isActive());
