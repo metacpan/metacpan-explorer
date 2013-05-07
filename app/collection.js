@@ -35,6 +35,11 @@ define(["backbone"], function(Backbone) {
 		sync: function(method, model, options) {
 			var store = this.store || this.model && this.model.prototype.store;
 			return store ? store.sync.apply(store, arguments) : $.when();
+		},
+		newModel: function(attributes, options) {
+			var model = new this.model(attributes, options);
+			this.add(model);
+			return model;
 		}
 	});
 });

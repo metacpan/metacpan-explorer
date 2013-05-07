@@ -7,29 +7,15 @@ define(["view"], function(View) {
 			"class": "navbar navbar-static-top"
 		},
 		initialize: function() {
-			this.listenTo(this.model, "load:start", this.startLoading);
-			this.listenTo(this.model, "load:end", this.endLoading);
-		},
-		render: function() {
-			var self = this;
-			View.prototype.render.apply(this, arguments);
-			var $list = this.$("> ul");
-			if(this.model) {
-				_.each(this.model.get("items"), function(item) {
-					var view = self.itemClass;
-					$list.append(new view({
-						model: item
-					}).el);
-				});
-			}
-			return this;
+			this.listenTo(this.collection, "load:start", this.startLoading);
+			this.listenTo(this.collection, "load:end", this.endLoading);
 		},
 		startLoading: function() {
 			if(!this.loading) {
 				this.loadingInterval = window.setInterval(_.bind(this.animateLogo, this), 2000);
 				_.defer(_.bind(this.animateLogo, this));
 			}
-			this.loading++;
+			this.loading++;	
 		},
 		endLoading: function() {
 			this.loading--;

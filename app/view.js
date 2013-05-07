@@ -25,16 +25,33 @@ define(["backbone"], function(Backbone) {
 		proxy: function(from, event) {
 			return from.bind(event, _.bind(this.trigger, this, event));
 		},
-		append: function() {
-			this.$el.append.apply(this.$el, arguments);
+		add: function() {
+			this.views = this.views || [];
+			this.views.push.apply(this.views, arguments);
+			return arguments.length === 1 ? arguments[0] : arguments;
+		},
+		remove: function() {
+			var args = arguments;
+			_.each(this.views || [], function(view) {
+				view.remove.apply(view, args);
+			})
+			return Backbone.View.prototype.remove.apply(this, arguments);
+		},
+		removeViews: function() {
+			var views = this.views;
+			_.invoke(views, "remove");
+			this.views = [];
+			return views;
 		},
 		render: function(options) {
+			this.removeViews();
 			var template = this.options.template || this.template;
 			options = _.extend({
-				model: this.model ? this.model.toJSON() : {},
-				collection: this.collection ? this.collection.toJSON() : {}
+				model: this.model ? this.model.toJSON() : null,
+				collection: this.collection ? this.collection.toJSON() : null
 			}, options || {});
 			if(template) this.$el.html(template(options));
+			if(this.model) this.$el.toggleClass("active", this.model.isActive());
 			return this;
 		}
 	});

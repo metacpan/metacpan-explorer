@@ -28,7 +28,7 @@ define(["backbone"], function(Backbone) {
 		 * @return {Boolean}
 		 */
 		isActive: function() {
-			return this.get("active");
+			return !!this.get("active");
 		},
 		sync: function(method, model, options) {
 		  var store = model.store || model.collection.store;

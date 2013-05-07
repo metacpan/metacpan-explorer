@@ -7,9 +7,11 @@ define(["model", "store/gist"], function(Model, Store) {
 			response: null
 		},
 		getCurl: function() {
-			var curl = "curl -XPOST api.metacpan.org" + this.get("endpoint");
+			if(!this.get("endpoint")) return "";
+			var curl = "curl " + (this.get("body") ? "-XPOST " : "") +
+				"'api.metacpan.org" + this.get("endpoint") + "'";
 			if(this.get("body")) curl +=
-				" -d \"$(curl -s gist.github.com/metacpan/" + this.id + "/raw/body.json)\"";
+				" -d \"$(curl -Ls gist.github.com/metacpan/" + this.id + "/raw/body.json)\"";
 			return curl;
 		},
 		toJSON: function() {
@@ -18,8 +20,10 @@ define(["model", "store/gist"], function(Model, Store) {
 			return json;
 		},
 		parse: function(res) {
+			if(!res.files) return res;
 			return _.extend(res, {
-				body: res.files["body.json"] ? res.files["body.json"].content : null,
+				body: res.files["body.json"] && res.files["body.json"].content !== "null"
+						? res.files["body.json"].content : null,
 				endpoint: res.files["endpoint.txt"].content
 			});
 		},
@@ -45,9 +49,9 @@ define(["model", "store/gist"], function(Model, Store) {
 				});
 				return self;
 			}).always(function(model) {
-				if(options.gist !== false)
+				if(options.gist !== false && model.get("public") !== true)
 					model.save().done(function(model) {
-						location.hash = "/" + model.id
+						location.hash = "/" + model.id;
 					});
 			});
 		}

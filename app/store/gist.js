@@ -22,7 +22,7 @@ define(["backbone"], function(Backbone) {
 		},
 		create: function(model, options) {
 			var gist = {
-				public: true,
+				public: false,
 				files: {
 					"endpoint.txt": {
 						content: model.get("endpoint")
@@ -30,13 +30,11 @@ define(["backbone"], function(Backbone) {
 					"response.json": {
 						content: model.get("response")
 					},
-					"body.json": model.get("body") ? {
-						content: model.get("body")
-					} : null
+					"body.json": {
+						content: model.get("body") || "null"
+					}
 				}
 			};
-			if(!model.id && !model.get("body"))
-				delete gist.files["body.json"];
 			return this.request({
 				url: "https://api.github.com/gists" + (model.id ? "/" + model.id : ""),
 				type: model.id ? "PATCH" : "POST",
@@ -53,10 +51,10 @@ define(["backbone"], function(Backbone) {
 			options = options || {};
 			var resp;
 			switch (method) {
-			    case "read": resp = model.id ? this.find(model, options) : this.findAll(model, options); break;
-			    case "create": resp = this.create(model, options); break;
-			    case "update": resp = this.update(model, options); break;
-			    case "delete": resp = this.destroy(model, options); break;
+				case "read": resp = model.id ? this.find(model, options) : this.findAll(model, options); break;
+				case "create": resp = this.create(model, options); break;
+				case "update": resp = this.update(model, options); break;
+				case "delete": resp = this.destroy(model, options); break;
 			}
 			resp.always(function() { model.trigger("load:end") });
 			return resp.fail(options.error || $.noop).done(options.success || $.noop);

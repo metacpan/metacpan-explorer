@@ -26,8 +26,8 @@ require.config({
     }
   },
   paths: {
-  	jquery: "../inc/jquery",
-  	underscore: "../inc/underscore",
+    jquery: "../inc/jquery",
+    underscore: "../inc/underscore",
     backbone: "../inc/backbone",
     "bootstrap-typeahead": "../inc/bootstrap/js/bootstrap-typeahead",
     "bootstrap-dropdown": "../inc/bootstrap/js/bootstrap-dropdown",
@@ -38,51 +38,56 @@ require.config({
 });
 
 requirejs([
-  "view/viewport",
-  "view/navbar",
-  "view/request",
-  "view/Sidebar",
-  "model/request",
-  "model",
-  "collection"],
-function   (Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
+    "router",
+    "view/viewport",
+    "view/navbar",
+    "view/request",
+    "view/Sidebar",
+    "model/request",
+    "model",
+    "collection"
+  ],
+  function (router, Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
 
-  Backbone.history.start()
+    var viewport = new Viewport();
+    $(document.body).replaceWith(viewport.render().el);
 
-  var viewport = new Viewport();
-  $(document.body).replaceWith(viewport.render().el);
+    var request = new Request();
 
-  var request = new Request();
-
-  var examples = new Collection([request], {
-    model: Request
-  });
-  examples.fetch({ reset: true });
-
-
-  var sidebar = new SidebarView({
-    model: request,
-    collection: examples
-  });
-
-  var navbar = new Navbar({
-    model: request
-  });
-  viewport.$el.append(navbar.render().el);
-
-
-  var requestView = new RequestView({
-    model: request,
-    collection: new Collection([{}])
-  });
-  viewport.$el.append(requestView.render().el);viewport.$el.append(sidebar.render().el);
-
-
-  var id;
-  if(id = location.hash.replace(/^#?\/(\w+)$/, "$1")) {
-    request.id = id;
-    request.fetch().done(function() {
-      request.request({ gist: false })
+    var examples = window.e = new Collection([request], {
+      model: Request,
+      comparator: "description"
     });
-  }    
+    var sidebar = viewport.add(new SidebarView({ collection: examples }));
+    var navbar = viewport.add(new Navbar({ collection: examples }));
+
+    var fetch = examples.fetch();
+
+    viewport.$el.append(
+      navbar.render().el,
+      sidebar.render().el
+    );
+
+    examples.bind("change:active", function(model, value) {
+      if(!value) return;
+      if(viewport.requestView) viewport.requestView.remove();
+      viewport.requestView = viewport.add(new RequestView({ model: model }));
+      viewport.$el.append(viewport.requestView.render().el);
+    });
+
+    request.set("active", true);
+
+    router.on("route:load", function(id) {
+      navbar.startLoading();
+      fetch.then(function() {
+        var model = examples.get(id) || examples.newModel(id === "new" ? null : { id: id });
+        model.setActive();
+        if(id !== "new")
+          return model.fetch().then(function() {
+            return model.request({ gist: false });
+          });
+      }).always(function() {
+        navbar.endLoading();
+      });
+    }).start();
 });

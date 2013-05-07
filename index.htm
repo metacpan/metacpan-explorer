@@ -21,7 +21,7 @@
 	<div class="endpoint">
 		<form>
 			<div class="input-group">
-				<input type="text" autofocus="autofocus">
+				<input type="text" autofocus="autofocus" placeholder="Endpoint" value="<%- model.endpoint || "" %>">
 				<span class="input-group-btn">
 			    <button class="btn" type="submit" title="Shift + Enter">Request</button>
 			  </span>
@@ -29,7 +29,7 @@
 		</form>
 	</div>
 	<div class="editor">
-		<textarea placeholder="Request Body"></textarea>
+		<textarea placeholder="Request Body"><%- model.body || "" %></textarea>
 		<span class="label label-danger">Invalid JSON</span>
 	</div>
 	<div class="response">
@@ -42,9 +42,10 @@
 	</script>
 	<script type="text/template" id="template-sidebar">
 		<ul class="nav">
+			<li><a href="#/new"><span class="glyphicon glyphicon-chevron-right"></span> New Request</a></li>
 			<li class="nav-header">Curl</li>
 			<li class="input">
-				<input type="text" disabled="disabled" value="<%- model.curl %>" />
+				<input type="text" disabled="disabled" value="<%- model ? model.curl : "" %>" />
 			</li>
 			<li class="nav-header examples">Examples</li>
 		</ul>

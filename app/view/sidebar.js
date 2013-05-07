@@ -7,14 +7,19 @@ define(["view", "view/list-item"], function(View, ItemView) {
 			}
 		},
 		initialize: function() {
-			this.listenTo(this.model, "change", this.render);
-			this.listenTo(this.collection, "reset", this.render);
+			this.listenTo(this.collection, "sync", this.render);
+			this.listenTo(this.collection, "change:active", this.render);
 		},
 		render: function() {
-			View.prototype.render.apply(this, arguments);
+			var self = this;
+			var model = this.collection.getActive();
+			View.prototype.render.call(this, {
+				model: model ? model.toJSON() : null
+			});
 			var $nav = this.$nav = this.$("ul.nav");
 			this.collection.each(function(item) {
-				$nav.append(new ItemView({ model: item }).render().el);
+				if(!item.id) return;
+				$nav.append(self.add(new ItemView({ model: item })).render().el);
 			});
 			return this;
 		}
