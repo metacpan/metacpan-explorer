@@ -27,9 +27,9 @@ define(["backbone"], function(Backbone) {
 					"endpoint.txt": {
 						content: model.get("endpoint")
 					},
-					"response.json": {
-						content: model.get("response")
-					},
+					//"response.json": {
+					//	content: model.get("response")
+					//},
 					"body.json": {
 						content: model.get("body") || "null"
 					}

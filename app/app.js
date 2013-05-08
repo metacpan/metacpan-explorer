@@ -21,6 +21,10 @@ require.config({
       deps: ["jquery"],
       exports: "jQuery.fn.tooltip"
     },
+    "jquery.querystring": {
+      deps: ["jquery"],
+      exports: "jQuery.fn.getParam"
+    },
     "sh": {
       exports: "hljs"
     }
@@ -32,6 +36,7 @@ require.config({
     "bootstrap-typeahead": "../inc/bootstrap/js/bootstrap-typeahead",
     "bootstrap-dropdown": "../inc/bootstrap/js/bootstrap-dropdown",
     "bootstrap-tooltip": "../inc/bootstrap/js/bootstrap-tooltip",
+    "jquery.querystring": "../inc/jquery.querystring",
     "behave": "../inc/behave",
     "sh": "../inc/highlight"
   }
@@ -45,7 +50,8 @@ define([
     "view/Sidebar",
     "model/request",
     "model",
-    "collection"
+    "collection",
+    "jquery.querystring"
   ],
   function (router, Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
 
@@ -61,7 +67,7 @@ define([
     var sidebar = new SidebarView({ collection: examples });
     var navbar = new Navbar({ collection: examples });
 
-    var fetch = examples.fetch();
+    var fetch = examples.fetch({ remove: false });
 
     viewport.$el.append(
       navbar.render().el,
@@ -74,6 +80,12 @@ define([
       viewport.removeViews();
       viewport.$el.append(viewport.add(new RequestView({ model: model })).render().el);
     });
+
+    examples.bind("change:id", function(model, id) {
+      if(!model.isActive()) return;
+      window.history.pushState(null, null, "/");
+      router.navigate("//" + id);
+    })
 
     router.on("route:load", function(id) {
       navbar.startLoading();
@@ -88,4 +100,14 @@ define([
         navbar.endLoading();
       });
     }).start();
+
+    if($.getParam("url")) {
+      navbar.startLoading();
+      examples.newModel().setActive().set({
+        endpoint: $.getParam("url"),
+        body: $.getParam("content")
+      }).request().always(function() {
+        navbar.endLoading();
+      });
+    }
 });

@@ -51,9 +51,7 @@ define(["model", "store/gist"], function(Model, Store) {
 				return self;
 			}).always(function(model) {
 				if(options.gist !== false && model.get("public") !== true)
-					model.save().done(function(model) {
-						location.hash = "/" + model.id;
-					});
+					model.save();
 			});
 		}
 	});
