@@ -19,10 +19,10 @@ define(["view", "view/list-item"], function(View, ItemView) {
 			View.prototype.render.call(this, {
 				model: model ? model.toJSON() : null
 			});
-			var $nav = this.$nav = this.$("ul.nav");
+			var $nav = this.$nav = this.$("ul.nav .examples");
 			this.collection.each(function(item) {
 				if(!item.id) return;
-				$nav.append(self.add(new ItemView({ model: item })).render().el);
+				$nav.after(self.add(new ItemView({ model: item })).render().el);
 			});
 			return this;
 		}
