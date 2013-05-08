@@ -1,16 +1,16 @@
 div.sidebar {
-	min-height: 100%;
+	height: 100%;
 	z-index: 1;
+	position: relative;
 	width: 200px;
-	top: (@navbar-height - 1);
-	bottom: 0;
 	border-top: 1px solid rgba(0, 0, 0, 0.15);
 	text-shadow: 0 1px 0 #fff;
 	background-color: #f5f5f5;
 	box-shadow: inset -1px 0 0 #e5e5e5;
+	overflow-y: auto;
 
 	.nav {
-		padding-top: (@navbar-height - 1);
+		padding-top: (@navbar-height - 1 + 10);
 	}
 
 	.nav > li.input {
@@ -19,9 +19,7 @@ div.sidebar {
 }
 
 /* Nav: first level */
-div.sidebar > .nav {
-  margin: 0 0 25px 0;
-}
+
 div.sidebar .nav > li > a {
   display: block;
   color: #666;
