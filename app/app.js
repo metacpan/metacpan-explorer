@@ -25,20 +25,22 @@ require.config({
       deps: ["jquery"],
       exports: "jQuery.fn.getParam"
     },
-    "sh": {
+    "highlight": {
       exports: "hljs"
     }
   },
   paths: {
-    jquery: "../inc/jquery",
-    underscore: "../inc/underscore",
-    backbone: "../inc/backbone",
+    "jquery": "../inc/jquery",
+    "underscore": "../inc/underscore",
+    "backbone": "../inc/backbone",
     "bootstrap-typeahead": "../inc/bootstrap/js/bootstrap-typeahead",
     "bootstrap-dropdown": "../inc/bootstrap/js/bootstrap-dropdown",
     "bootstrap-tooltip": "../inc/bootstrap/js/bootstrap-tooltip",
     "jquery.querystring": "../inc/jquery.querystring",
     "behave": "../inc/behave",
-    "sh": "../inc/highlight"
+    "highlight": "../inc/highlight",
+    "text": "../inc/text",
+    "tpl": "../inc/tpl"
   }
 });
 
@@ -47,14 +49,14 @@ define([
     "view/viewport",
     "view/navbar",
     "view/request",
-    "view/Sidebar",
+    "view/sidebar",
     "model/request",
     "model",
     "collection",
     "jquery.querystring"
   ],
   function (router, Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
-
+    $(function(){
     var viewport = new Viewport();
     $(document.body).replaceWith(viewport.render().el);
 
@@ -85,7 +87,7 @@ define([
       if(!model.isActive()) return;
       window.history.pushState(null, null, "/");
       router.navigate("//" + id);
-    })
+    });
 
     router.on("route:load", function(id) {
       navbar.startLoading();
@@ -110,4 +112,5 @@ define([
         navbar.endLoading();
       });
     }
+    })
 });

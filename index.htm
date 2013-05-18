@@ -3,55 +3,9 @@
 <head>
 	<link rel="stylesheet/less" type="text/css" href="styles.less" />
 	<script src="inc/less.js" type="text/javascript"></script>
+	<script src="//yandex.st/highlightjs/7.3/highlight.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script data-main="app/app.js" src="inc/require.js"></script>
-	<script type="text/template" id="template-navbar">
-		<div class="logo">
-			<div class="ul"></div>
-			<div class="ur"></div>
-			<div class="ll"></div>
-			<div class="lr"></div>
-		</div>
-		<a class="navbar-brand">MetaCPAN Explorer</a>
-		<form class="navbar-form">
-			<div class="input-group">
-				<input type="text" autofocus="autofocus" placeholder="Endpoint" value="<%- model.endpoint || "" %>">
-				<span class="input-group-btn">
-			    <button class="btn" type="submit" title="Shift + Enter">Request</button>
-			  </span>
-			</div>
-		</form>
-	</script>
-	<script type="text/template" id="template-request">
-	<div class="request-inner">
-	<div class="editor">
-		<textarea placeholder="Request Body"><%- model.body || "" %></textarea>
-		<span class="label label-danger">Invalid JSON</span>
-	</div>
-	<div class="response">
-		<pre class="json">
-			<%= model.response || "" %>
-		</pre>
-	</div>
-
-	</div>
-	</script>
-	<script type="text/template" id="template-sidebar">
-		<ul class="nav">
-			<li><a href="#/new"><span class="glyphicon glyphicon-chevron-right"></span> New Request</a></li>
-			<li class="nav-header">Curl</li>
-			<li class="input">
-				<input type="text" disabled="disabled" value="<%- model ? model.curl : "" %>" />
-			</li>
-			<li class="nav-header examples">Examples</li>
-			<li class="nav-header">Resources</li>
-			<li><a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API Documentation</a></li>
-			<li><a href="https://github.com/CPAN-API/metacpan-explorer/issues">Report Issue</a></li>
-			<li><a href="https://github.com/CPAN-API/metacpan-explorer">Fork Me</a></li>
-		</ul>
-	</script>
-	<script type="text/template" id="template-list-item">
-	<a href="#/<%- model.id %>"><%- model.description || model.id %></a>
-	</script>
 </head>
 <body>
 </body>
