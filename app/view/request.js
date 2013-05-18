@@ -10,7 +10,6 @@ define([
 		template: template,
 		events: {
 			"keydown textarea": function(e) {
-				this.model.set("body", this.$body.val());
 				if((e.keyCode || e.which) === 13 && e.shiftKey === true) {
 					this.model.request();
 					return false;
@@ -20,6 +19,7 @@ define([
 		},
 		validateBody: function() {
 			var json = this.$body.val();
+			this.model.set("body", json);
 			try {
 				!json || JSON.parse(json);
 				this.$label.hide();
