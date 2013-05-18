@@ -1,6 +1,11 @@
-define(["view", "view/list-item"], function(View, ItemView) {
+define([
+	"view",
+	"view/list-item",
+	"tpl!template/sidebar.htm"
+], function(View, ItemView, template) {
 	return View.extend({
 		name: "sidebar",
+		template: template,
 		events: {
 			"click .input": function(e) {
 				$(e.target).focus().select();

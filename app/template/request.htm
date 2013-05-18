@@ -1,0 +1,11 @@
+<div class="request-inner">
+	<div class="editor">
+		<textarea placeholder="Request Body"><%- model.body || "" %></textarea>
+		<span class="label label-danger">Invalid JSON</span>
+	</div>
+	<div class="response">
+		<pre class="json">
+			<%= model.response || "" %>
+		</pre>
+	</div>
+</div>

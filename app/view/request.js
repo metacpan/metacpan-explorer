@@ -1,11 +1,13 @@
 define([
 	"view",
 	"behave",
-	"sh",
+	"highlight",
+	"tpl!template/request.htm",
 	"bootstrap-dropdown"
-], function(View, Behave, hljs) {
+], function(View, Behave, hljs, template) {
 	return View.extend({
 		name: "request",
+		template: template,
 		events: {
 			"keydown textarea": function(e) {
 				this.model.set("body", this.$body.val());
@@ -33,7 +35,9 @@ define([
 			});
 		},
 		updateResponse: function() {
-			this.$('pre').html(this.model.get("response")).each(function(i, e) {hljs.highlightBlock(e)});
+			this.$('pre').html(this.model.get("response")).each(function(i, e) {
+				hljs.highlightBlock(e);
+			});
 		},
 		render: function() {
 			var self = this;

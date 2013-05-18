@@ -1,11 +1,13 @@
 define([
 	"view",
+	"tpl!template/navbar.htm",
 	"bootstrap-typeahead",
 	"bootstrap-tooltip"
-], function(View) {
+], function(View, template) {
 	return View.extend({
 		loading: 0,
 		loadingInterval: null,
+		template: template,
 		name: "navbar",
 		attributes: {
 			"class": "navbar navbar-fixed-top"
