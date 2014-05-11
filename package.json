@@ -1,0 +1,12 @@
+{
+  "//": "Define repository to silence npm warning.",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/CPAN-API/metacpan-explorer"
+  },
+  "//": "NOTE: Restrict less to 1.3 because later versions deprecate and ignore the yui-compress option that we still use.",
+  "devDependencies": {
+    "less": "1.3.3",
+    "requirejs": ">=0"
+  }
+}
