@@ -27,3 +27,11 @@ In the project root run
 
 It will install dependencies via npm
 and regenerate the static files into the `build` directory.
+
+## Updating Submodules
+
+This application has Bootstrap as a Submodule, sometime if your Submodule is outdate it will cause some error as ‘Couldn’t load .. (some Bootstrap components)’. 
+
+To solve it, make sure your Submodule is initialized. If you’re using VM from metacpan-developer it probably has been done, otherwise run
+
+    git submodule init && git submodule update
