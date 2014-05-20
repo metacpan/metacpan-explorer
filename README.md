@@ -36,6 +36,6 @@ To run it somewhere else you'll need to make sure you have
 
 This application has Bootstrap as a Submodule, sometime if your Submodule is outdate it will cause some error as ‘Couldn’t load .. (some Bootstrap components)’. 
 
-To solve it, make sure your Submodule is initialized. If you’re using VM from metacpan-developer it probably has been done, otherwise run
+To solve it, make sure your submodule is initialized:
 
     git submodule init && git submodule update
