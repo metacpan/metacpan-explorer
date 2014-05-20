@@ -19,14 +19,18 @@ Give the gist a useful description and save. The example should then show up on 
 
 ## Rebuilding the static files
 
-Make sure you have [node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
-
 In the project root run
 
     ./build.sh
 
 It will install dependencies via npm
 and regenerate the static files into the `build` directory.
+
+The [developer vm](https://github.com/CPAN-API/metacpan-developer)
+has everything you need for this.
+
+To run it somewhere else you'll need to make sure you have
+[node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
 ## Updating Submodules
 
