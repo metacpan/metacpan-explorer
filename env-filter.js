@@ -4,7 +4,9 @@ process.stdin.on("data", function(data){ text += data; });
 process.stdin.on("end", function(){
   process.stdout.write(
     text
-    .replace(/(<!--\s+\{\{dev\}\}(.|\n)+?\{\{\/dev\}\}\s+-->\n?)/g, "")
-    .replace(/(<!--\s+\{\{build\}\}.*\n?|.*\{\{\/build\}\}\s+-->\n?)/mg, "")
+      .replace(/(?:<!--\s+)?\{\{(dev|build)\}\}((?:.|\n)+?)?\{\{\/\1\}\}(?:\s+-->)?/g, function(){
+        // Enable the contents of the 'build' sections and remove the 'dev' sections.
+        return RegExp.$1 == 'build' ? RegExp.$2 : '';
+      })
   );
 });
