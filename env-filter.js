@@ -8,5 +8,7 @@ process.stdin.on("end", function(){
         // Enable the contents of the 'build' sections and remove the 'dev' sections.
         return RegExp.$1 == 'build' ? RegExp.$2 : '';
       })
+      // Remove any remaining blank lines.
+      .replace(/\n{2,}/g, "\n")
   );
 });
