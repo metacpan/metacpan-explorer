@@ -8,4 +8,5 @@ export PATH=node_modules/.bin:$PATH
 
 r.js -o app.build.js
 lessc --yui-compress styles.less > build/styles.css
-cp index.build.htm build/index.htm
+
+node env-filter.js < index.htm > build/index.htm
