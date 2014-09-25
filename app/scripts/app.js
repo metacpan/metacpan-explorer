@@ -1,5 +1,5 @@
 require.config({
-  baseUrl: "app",
+  baseUrl: "scripts",
   urlArgs: "bust=" + (new Date()).getTime(),
   shim: {
     underscore: {
