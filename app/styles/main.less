@@ -11,7 +11,8 @@ html, body {
 
 @import "logo.less";
 
-@import "//yandex.st/highlightjs/7.3/styles/default.min.css";
+// Force import as less to enusre the contents are embedded in build file.
+@import (less) "../inc/highlight-default.css";
 
 textarea,
 input[type="text"],
