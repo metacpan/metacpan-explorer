@@ -11,31 +11,35 @@ div.sidebar {
 
   .nav {
     padding-top: (@navbar-height - 1 + 10);
+
+    > li {
+      &.input {
+        padding: 0 15px;
+      }
+
+      /* Nav: first level */
+
+      > a {
+        display: block;
+        color: #666;
+        padding: 4px 15px;
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          border-right: 1px solid #d5d5d5;
+        }
+      }
+    }
+    > .active {
+      > a,
+      &:hover > a,
+      &:focus > a {
+        cursor: default;
+        font-weight: 500;
+        color: #b94a48;
+        background-color: transparent;
+        border-right: 1px solid #b94a48;
+      }
+    }
   }
-
-  .nav > li.input {
-    padding: 0 15px;
-  }
-}
-
-/* Nav: first level */
-
-div.sidebar .nav > li > a {
-  display: block;
-  color: #666;
-  padding: 4px 15px;
-}
-div.sidebar .nav > li > a:hover,
-div.sidebar .nav > li > a:focus {
-  text-decoration: none;
-  border-right: 1px solid #d5d5d5;
-}
-div.sidebar .nav > .active > a,
-div.sidebar .nav > .active:hover > a,
-div.sidebar .nav > .active:focus > a {
-  cursor: default;
-  font-weight: 500;
-  color: #b94a48;
-  background-color: transparent;
-  border-right: 1px solid #b94a48;
 }
