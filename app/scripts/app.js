@@ -26,6 +26,13 @@ require.config({
       exports: "jQuery.fn.getParam"
     },
     "highlight": {
+      // https://highlightjs.org/download/
+      // We can download a custom build with only JSON support (all we need).
+      // Version 8.2 of highlight.js uses `var` so when requirejs emeds it in
+      // a large function call it won't be available on `this`.
+      // By returning the local scope var we can use the minified custom
+      // download without needing to wrap or alter the file.
+      init: function(){ /*global hljs*/ return hljs; },
       exports: "hljs"
     }
   },
