@@ -1,10 +1,11 @@
 define([
+  "underscore",
   "view",
   "behave",
   "highlight",
   "tpl!template/request.htm",
   "bootstrap-dropdown"
-], function(View, Behave, hljs, template) {
+], function(_, View, Behave, hljs, template) {
   return View.extend({
     name: "request",
     template: template,
@@ -35,7 +36,8 @@ define([
       });
     },
     updateResponse: function() {
-      this.$('pre').html(this.model.get("response")).each(function(i, e) {
+      var res = _.escape(this.model.get("response"));
+      this.$('pre').html(res).each(function(i, e) {
         hljs.highlightBlock(e);
       });
     },
