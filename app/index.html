@@ -12,18 +12,12 @@
 <!-- {{dev}} -->
   <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
   <script src="inc/less.js" type="text/javascript"></script>
-<!-- {{/dev}} -->
-
-<!-- {{build}}
-  <link rel="stylesheet" type="text/css" href="styles.css">
-{{/build}} -->
-
-<!-- {{dev}} -->
   <script data-main="scripts/app.js" src="inc/require.js"></script>
 <!-- {{/dev}} -->
 
 <!-- {{build}}
-  <script src="app.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css?bust={{bust}}">
+  <script type="text/javascript" src="app.js?bust={{bust}}"></script>
 {{/build}} -->
 
 </head>
