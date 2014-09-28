@@ -37,7 +37,7 @@ define([
     },
     updateResponse: function() {
       var res = _.escape(this.model.get("response"));
-      this.$('pre').html(res).each(function(i, e) {
+      this.$('pre code').html(res).each(function(i, e) {
         hljs.highlightBlock(e);
       });
     },
