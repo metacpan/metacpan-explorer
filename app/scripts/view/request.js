@@ -11,6 +11,7 @@ define([
     template: template,
     events: {
       "keydown textarea": function(e) {
+        // Shift + Enter to send request.
         if((e.keyCode || e.which) === 13 && e.shiftKey === true) {
           this.model.request();
           return false;
@@ -42,7 +43,6 @@ define([
       });
     },
     render: function() {
-      var self = this;
       View.prototype.render.apply(this, arguments);
       this.$label = this.$(".editor .label").hide();
       this.$body = this.$("textarea");
