@@ -1,8 +1,5 @@
 #!/bin/sh
 
-rm -rf build tmp
-mkdir -p build
-
 npm install
 export PATH=node_modules/.bin:$PATH
 
