@@ -38,7 +38,7 @@ define([
     },
     updateResponse: function() {
       var res = _.escape(this.model.get("response"));
-      this.$('pre code').html(res).each(function(i, e) {
+      this.$response.html(res).each(function(i, e) {
         hljs.highlightBlock(e);
       });
     },
@@ -46,6 +46,7 @@ define([
       View.prototype.render.apply(this, arguments);
       this.$label = this.$(".editor .label").hide();
       this.$body = this.$("textarea");
+      this.$response = this.$('pre code');
       new Behave({
         textarea: this.$("textarea").get(0),
         tabSize: 2
