@@ -52,18 +52,27 @@ require.config({
 });
 
 define([
-    "router",
-    "view/viewport",
-    "view/navbar",
-    "view/request",
-    "view/sidebar",
-    "model/request",
-    "model",
-    "collection",
-    "jquery.querystring"
-  ],
-  function (router, Viewport, Navbar, RequestView, SidebarView, Request, Model, Collection) {
-    $(function(){
+  "router",
+  "view/viewport",
+  "view/navbar",
+  "view/request",
+  "view/sidebar",
+  "model/request",
+  "model",
+  "collection",
+  "jquery.querystring"
+],
+function (
+  router,
+  Viewport,
+  Navbar,
+  RequestView,
+  SidebarView,
+  Request,
+  Model,
+  Collection
+) {
+  $(function(){
     var viewport = new Viewport();
     $(document.body).replaceWith(viewport.render().el);
 
@@ -119,5 +128,5 @@ define([
         navbar.endLoading();
       });
     }
-    })
+  });
 });
