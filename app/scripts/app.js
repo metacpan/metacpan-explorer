@@ -13,6 +13,10 @@ require.config({
       deps: ["jquery"],
       exports: "jQuery.fn.dropdown"
     },
+    "bootstrap-modal": {
+      deps: ["jquery"],
+      exports: "jQuery.fn.modal"
+    },
     "bootstrap-typeahead": {
       deps: ["jquery"],
       exports: "jQuery.fn.typeahead"
@@ -42,6 +46,7 @@ require.config({
     "backbone": "../inc/backbone",
     "bootstrap-typeahead": "../inc/bootstrap/js/bootstrap-typeahead",
     "bootstrap-dropdown": "../inc/bootstrap/js/bootstrap-dropdown",
+    "bootstrap-modal": "../inc/bootstrap/js/bootstrap-modal",
     "bootstrap-tooltip": "../inc/bootstrap/js/bootstrap-tooltip",
     "jquery.querystring": "../inc/jquery.querystring",
     "behave": "../inc/behave",
