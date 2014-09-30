@@ -1,5 +1,10 @@
 <ul class="nav">
   <li><a href="#/new"><span class="glyphicon glyphicon-chevron-right"></span> New Request</a></li>
+  <li>
+    <a href="#/settings" class="settings-toggle">
+      <span class="glyphicon glyphicon-cog"></span> Settings
+    </a>
+  </li>
   <li class="nav-header">Curl</li>
   <li class="input">
     <input type="text" readonly value="<%- model ? model.curl : "" %>" />

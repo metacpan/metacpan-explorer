@@ -64,9 +64,11 @@ define([
   "view/navbar",
   "view/request",
   "view/sidebar",
+  "view/settings",
   "model/request",
   "model",
   "collection",
+  "settings",
   "jquery.querystring"
 ],
 function (
@@ -76,6 +78,8 @@ function (
   Navbar,
   RequestView,
   SidebarView,
+  SettingsView,
+  settings,
   Request,
   Model,
   Collection
@@ -90,7 +94,12 @@ function (
       model: Request,
       comparator: "description"
     });
-    var sidebar = new SidebarView({ collection: examples });
+
+    var settingsView = new SettingsView({ model: settings });
+    var sidebar = new SidebarView({
+      settingsView: settingsView,
+      collection: examples
+    });
     var navbar = new Navbar({ collection: examples });
 
     var fetch = examples.fetch({ remove: false });
@@ -98,6 +107,7 @@ function (
     viewport.$el.append(
       navbar.render().el,
       sidebar.render().el,
+      settingsView.render().el,
       viewport.add(new RequestView({ model: request })).render().el
     );
 

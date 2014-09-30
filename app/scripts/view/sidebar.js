@@ -7,13 +7,15 @@ define([
     name: "sidebar",
     template: template,
     events: {
+      "click .settings-toggle": "toggleSettings",
       "click .input": function(e) {
         $(e.target).focus().select();
       }
     },
-    initialize: function() {
+    initialize: function(options) {
       this.listenTo(this.collection, "sync", this.render);
       this.listenTo(this.collection, "change:active", this.updateCurl);
+      this.settingsView = options.settingsView;
     },
     updateCurl: function(model, value) {
       this.$("input").val(value ? model.getCurl() : "");
@@ -30,6 +32,10 @@ define([
         $nav.after(self.add(new ItemView({ model: item })).render().el);
       });
       return this;
+    },
+    toggleSettings: function(e) {
+      e.preventDefault();
+      this.settingsView.show();
     }
   });
 });
