@@ -1,0 +1,28 @@
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="hide sr-only">Close</span></button>
+        <h4 class="modal-title">Settings</h4>
+      </div>
+
+      <div class="modal-body settings-form">
+        <ul class="list-group">
+
+          <li class="list-group-item">
+            <label>
+              <%= checkbox('editorFeatures') %>
+              Use editor enhancements
+            </label>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default cancel" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary save">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
