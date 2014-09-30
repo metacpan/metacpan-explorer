@@ -34,8 +34,7 @@ To run it somewhere else you'll need to make sure you have
 
 ## Updating Submodules
 
-This application has Bootstrap as a Submodule, sometime if your Submodule is outdate it will cause some error as ‘Couldn’t load .. (some Bootstrap components)’. 
-
-To solve it, make sure your submodule is initialized:
+This repo includes Bootstrap as a submodule,
+so after cloning (or pulling) make sure your submodule is up to date:
 
     git submodule init && git submodule update
