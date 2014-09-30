@@ -1,4 +1,4 @@
-define(["backbone"], function(Backbone) {
+define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
   return Backbone.Collection.extend({
     /**
      * Sets the `active` attribute of all models but `model` to `false`.

@@ -1,3 +1,4 @@
+/*global require*/
 require.config({
   baseUrl: "scripts",
   urlArgs: "bust=" + (new Date()).getTime(),
@@ -57,6 +58,7 @@ require.config({
 });
 
 define([
+  "jquery",
   "router",
   "view/viewport",
   "view/navbar",
@@ -68,6 +70,7 @@ define([
   "jquery.querystring"
 ],
 function (
+  $,
   router,
   Viewport,
   Navbar,
