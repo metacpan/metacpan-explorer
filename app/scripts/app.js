@@ -65,10 +65,10 @@ define([
   "view/request",
   "view/sidebar",
   "view/settings",
+  "settings",
   "model/request",
   "model",
   "collection",
-  "settings",
   "jquery.querystring"
 ],
 function (
