@@ -23,12 +23,7 @@ define([
     validateBody: function() {
       var json = this.$body.val();
       this.model.set("body", json);
-      try {
-        !json || JSON.parse(json);
-        this.$label.hide();
-      } catch(e) {
-        this.$label.show();
-      }
+      this.setValid(this.model.isValid());
     },
     initialize: function() {
       this.listenTo(this.model, "change:response", this.updateResponse);
@@ -64,6 +59,14 @@ define([
           textarea: this.$body.get(0),
           tabSize: 2
         });
+      }
+    },
+    setValid: function(valid) {
+      if( valid ){
+        this.$label.hide();
+      }
+      else {
+        this.$label.show();
       }
     }
   });

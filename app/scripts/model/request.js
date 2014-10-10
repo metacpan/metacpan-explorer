@@ -53,6 +53,17 @@ define(["model", "store/gist"], function(Model, Store) {
         if(options.gist !== false && model.get("public") !== true)
           model.save();
       });
+    },
+    validate: function(attributes, options) {
+      var json = attributes.body;
+      try {
+        if( json ){
+          JSON.parse(json);
+        }
+      }
+      catch(e) {
+        return e;
+      }
     }
   });
 });
