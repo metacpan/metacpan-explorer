@@ -5,6 +5,30 @@ define([
   "tpl!template/settings.htm",
   "bootstrap-modal"
 ], function($, _, Backbone, template){
+
+  var _helpers = {
+    //e: _.escape,
+
+    checkbox: function(name) {
+      return '<input name="' + name + '" type="checkbox" ' + (this.model.get(name) ? "checked" : "") + '/>';
+    },
+
+    item: function() {
+      return [
+        '<li class="list-group-item"><label>',
+        _.toArray(arguments).join(''),
+        '</label></li>'
+      ].join('');
+    }
+  };
+
+  var _bind_helpers = function(context) {
+    return _.reduce(_helpers, function(memo, func, name) {
+      memo[name] = _.bind(func, context);
+      return memo;
+    }, {});
+  };
+
   return Backbone.View.extend({
     tagName: 'div',
     id: 'settings',
@@ -16,8 +40,8 @@ define([
       "click .save": "save"
     },
 
-    checkbox: function(name) {
-      return '<input name="' + name + '" type="checkbox" ' + (this.model.get(name) ? "checked" : "") + '/>';
+    initialize: function() {
+      this.helpers = _bind_helpers(this);
     },
 
     bsmodal: function(arg) {
@@ -27,9 +51,8 @@ define([
     render: function(options) {
       this.changes = {};
       this.$el.html(this.template(_.extend({
-        checkbox: _.bind(this.checkbox, this),
         model: this.model.toJSON()
-      }, options)));
+      }, this.helpers, options)));
       this.$modal = $('#settings .modal');
       this.$toggle = $('.settings-toggle');
       return this;
