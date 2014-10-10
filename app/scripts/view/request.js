@@ -43,16 +43,19 @@ define([
       this.listenTo(this.model, "change:response", this.updateResponse);
       this.listenTo(this.model, "change:body",     this.onChangeBody);
       this.listenTo(settings, 'change:editorFeatures', this._setEditorFeatures);
+      this.listenTo(settings, 'change:highlightResponse', this.updateResponse);
       this.listenTo(settings, 'change:wrapLines',         this.onChangeWrapLines);
       this.listenTo(settings, 'change:instantValidation', this.onChangeInstantValidation);
     },
 
     updateResponse: function() {
       var res = _.escape(this.model.get("response"));
-      this.$response.html(res).each(function(i, e) {
-        hljs.highlightBlock(e);
-      });
+      this.$response.html(res);
+      if( settings.get('highlightResponse') ){
+        hljs.highlightBlock(this.$response.get(0));
+      }
     },
+
     render: function() {
       View.prototype.render.apply(this, arguments);
       this.$label = this.$(".editor .label").hide();

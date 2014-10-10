@@ -5,6 +5,8 @@ define(["backbone"], function(Backbone) {
     defaults: {
       // Fancy "IDE-like" behavior in editor.
       editorFeatures: true,
+      // Apply syntax highlighting to response body.
+      highlightResponse: true,
       // Wrap lines of response body (alternative is horizontal scrollbar).
       wrapLines: true,
       // Validate request body as you type.
