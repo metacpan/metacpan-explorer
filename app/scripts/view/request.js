@@ -18,19 +18,28 @@ define([
           return false;
         }
       },
-      "keyup textarea": "validateBody"
+      "keyup textarea": "updateBody"
     },
-    validateBody: function() {
+
+    updateBody: function() {
       var json = this.$body.val();
       this.model.set("body", json);
+    },
+    validateBody: function () {
       this.setValid(this.model.isValid());
     },
+    onChangeBody: function(m, body) {
+      // Only update the html if the text is different,
+      // since doing so can move the cursor in some browsers.
+      if( body !== this.$body.val() ){
+        this.$body.val(body);
+      }
+      this.validateBody();
+    },
+
     initialize: function() {
       this.listenTo(this.model, "change:response", this.updateResponse);
-      this.listenTo(this.model, "change:body", function() {
-        this.$body.val(this.model.get("body"));
-        this.validateBody();
-      });
+      this.listenTo(this.model, "change:body",     this.onChangeBody);
       this.listenTo(settings, 'change:editorFeatures', this._setEditorFeatures);
     },
     updateResponse: function() {
