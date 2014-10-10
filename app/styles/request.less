@@ -41,6 +41,10 @@ div.request {
       font-size: 0.8em;
       line-height: 1.4;
       color: #000;
+
+      // Redo the placeholder style with increased specificity.
+      // (It looks fine most of the time but in my vm IE it looks black.)
+      .placeholder();
     }
   }
 }
