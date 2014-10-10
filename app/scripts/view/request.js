@@ -34,14 +34,18 @@ define([
       if( body !== this.$body.val() ){
         this.$body.val(body);
       }
-      this.validateBody();
+      if( settings.get('instantValidation') ){
+        this.validateBody();
+      }
     },
 
     initialize: function() {
       this.listenTo(this.model, "change:response", this.updateResponse);
       this.listenTo(this.model, "change:body",     this.onChangeBody);
       this.listenTo(settings, 'change:editorFeatures', this._setEditorFeatures);
+      this.listenTo(settings, 'change:instantValidation', this.onChangeInstantValidation);
     },
+
     updateResponse: function() {
       var res = _.escape(this.model.get("response"));
       this.$response.html(res).each(function(i, e) {
@@ -68,6 +72,17 @@ define([
           textarea: this.$body.get(0),
           tabSize: 2
         });
+      }
+    },
+
+    onChangeInstantValidation: function(m, val, o){
+      if( val ){
+        // Initiate validation when enabled.
+        this.validateBody();
+      }
+      else {
+        // Update the display if checking is disabled.
+        this.setValid(true);
       }
     },
     setValid: function(valid) {
