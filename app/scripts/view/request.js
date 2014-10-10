@@ -43,6 +43,7 @@ define([
       this.listenTo(this.model, "change:response", this.updateResponse);
       this.listenTo(this.model, "change:body",     this.onChangeBody);
       this.listenTo(settings, 'change:editorFeatures', this._setEditorFeatures);
+      this.listenTo(settings, 'change:wrapLines',         this.onChangeWrapLines);
       this.listenTo(settings, 'change:instantValidation', this.onChangeInstantValidation);
     },
 
@@ -58,6 +59,8 @@ define([
       this.$body = this.$("textarea");
       this.$response = this.$('pre code');
       this._setEditorFeatures(null, settings.get('editorFeatures'));
+      this.setWrapLines(settings.get('wrapLines'));
+
       this.updateResponse();
       return this;
     },
@@ -92,6 +95,11 @@ define([
       else {
         this.$label.show();
       }
+    },
+
+    onChangeWrapLines: function(m, val, o) { this.setWrapLines(val); },
+    setWrapLines: function(wrap) {
+      this.$response.toggleClass('wrap', wrap);
     }
   });
 });

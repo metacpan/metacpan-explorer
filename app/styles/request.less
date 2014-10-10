@@ -58,7 +58,6 @@ div.response {
     overflow: auto;
     border-radius: 0;
     border-left-width: 0;
-    white-space: pre;
     word-wrap: normal;
     font-size: 0.8em;
     line-height: 1.4;
@@ -68,6 +67,11 @@ div.response {
       font: inherit;
       margin: 0;
       padding: 0;
+      white-space: pre;
+
+      &.wrap {
+        white-space: pre-wrap;
+      }
     }
 
     .hljs-attribute {
