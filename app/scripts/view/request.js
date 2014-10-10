@@ -42,7 +42,7 @@ define([
     initialize: function() {
       this.listenTo(this.model, "change:response", this.updateResponse);
       this.listenTo(this.model, "change:body",     this.onChangeBody);
-      this.listenTo(settings, 'change:editorFeatures', this._setEditorFeatures);
+      this.listenTo(settings, 'change:editorFeatures',    this.onChangeEditorFeatures);
       this.listenTo(settings, 'change:highlightResponse', this.updateResponse);
       this.listenTo(settings, 'change:wrapLines',         this.onChangeWrapLines);
       this.listenTo(settings, 'change:instantValidation', this.onChangeInstantValidation);
@@ -61,14 +61,16 @@ define([
       this.$label = this.$(".editor .label").hide();
       this.$body = this.$("textarea");
       this.$response = this.$('pre code');
-      this._setEditorFeatures(null, settings.get('editorFeatures'));
+
+      this.setEditorFeatures(settings.get('editorFeatures'));
       this.setWrapLines(settings.get('wrapLines'));
 
       this.updateResponse();
       return this;
     },
 
-    _setEditorFeatures: function(m, enabled, o) {
+    onChangeEditorFeatures: function(m, val, o){ this.setEditorFeatures(val); },
+    setEditorFeatures: function(enabled) {
       if( this.behave ){
         this.behave.destroy();
         this.behave = null;
