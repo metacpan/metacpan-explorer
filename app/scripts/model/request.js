@@ -1,4 +1,4 @@
-define(["model", "store/gist"], function(Model, Store) {
+define(["jquery", "underscore", "model", "store/gist"], function($, _, Model, Store) {
   return Model.extend({
     store: new Store(),
     defaults: {
@@ -8,11 +8,12 @@ define(["model", "store/gist"], function(Model, Store) {
       active: false
     },
     getCurl: function() {
-      if(!this.get("endpoint")) return "";
+      if(!this.get("endpoint")){ return ""; }
       var curl = "curl " + (this.get("body") ? "-XPOST " : "") +
         "'api.metacpan.org" + this.get("endpoint") + "'";
-      if(this.get("body")) curl +=
-        " -d \"$(curl -Ls gist.github.com/metacpan/" + this.id + "/raw/body.json)\"";
+      if(this.get("body")){
+        curl += " -d \"$(curl -Ls gist.github.com/metacpan/" + this.id + "/raw/body.json)\"";
+      }
       return curl;
     },
     toJSON: function() {
@@ -21,10 +22,10 @@ define(["model", "store/gist"], function(Model, Store) {
       return json;
     },
     parse: function(res) {
-      if(!res.files) return res;
+      if(!res.files){ return res; }
       return _.extend(res, {
-        body: res.files["body.json"] && res.files["body.json"].content !== "null"
-            ? res.files["body.json"].content : null,
+        body: (res.files["body.json"] && res.files["body.json"].content !== "null" ?
+            res.files["body.json"].content : null),
         endpoint: res.files["endpoint.txt"].content
       });
     },
@@ -35,8 +36,8 @@ define(["model", "store/gist"], function(Model, Store) {
       return $.ajax({
         url: "//api.metacpan.org" + this.get("endpoint"),
         dataType: "text",
-        type: body ? "POST" : "GET",
-        data: body ? body : null
+        type: (body ? "POST" : "GET"),
+        data: (body || null)
       }).then(function(res) {
         self.set({
           response: res,
@@ -50,11 +51,12 @@ define(["model", "store/gist"], function(Model, Store) {
         });
         return self;
       }).always(function(model) {
-        if(options.gist !== false && model.get("public") !== true)
+        if(options.gist !== false && model.get("public") !== true){
           model.save();
+        }
       });
     },
-    validate: function(attributes, options) {
+    validate: function(attributes) {
       var json = attributes.body;
       try {
         if( json ){

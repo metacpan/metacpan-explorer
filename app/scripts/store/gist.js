@@ -1,6 +1,6 @@
-define(["backbone"], function(Backbone) {
+define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
 
-  var Storage = function() {};
+  var Storage = function() { return; };
   _.extend(Storage.prototype, Backbone.Events, {
     request: function(options) {
       options.url += "?access_token=62ac27f3962648d0e158992cbaa3cc3bd8562995";
@@ -42,10 +42,10 @@ define(["backbone"], function(Backbone) {
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(gist)
-      }).then(function(res) { return { id: res.id } });
+      }).then(function(res) { return { id: res.id }; });
     },
-    update: function() { return this.create.apply(this, arguments) },
-    destroy: function() { throw "destroy not implemented in " + this },
+    update: function() { return this.create.apply(this, arguments); },
+    destroy: function() { throw "destroy not implemented in " + this; },
     sync: function(method, model, options) {
       model.trigger("load:start");
       options = options || {};
@@ -56,7 +56,7 @@ define(["backbone"], function(Backbone) {
         case "update": resp = this.update(model, options); break;
         case "delete": resp = this.destroy(model, options); break;
       }
-      resp.always(function() { model.trigger("load:end") });
+      resp.always(function() { model.trigger("load:end"); });
       return resp.fail(options.error || $.noop).done(options.success || $.noop);
     }
   });

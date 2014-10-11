@@ -7,6 +7,7 @@ define([
   "tpl!template/request.htm",
   "bootstrap-dropdown"
 ], function(_, View, settings, Behave, hljs, template) {
+  /*jslint unparam: true*/ // A lot of event callbacks in here.
   return View.extend({
     name: "request",
     template: template,

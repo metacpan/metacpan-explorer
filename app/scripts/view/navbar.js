@@ -1,9 +1,10 @@
 define([
+  "underscore",
   "view",
   "tpl!template/navbar.htm",
   "bootstrap-typeahead",
   "bootstrap-tooltip"
-], function(View, template) {
+], function(_, View, template) {
   return View.extend({
     loading: 0,
     loadingInterval: null,
@@ -13,7 +14,7 @@ define([
       "class": "navbar navbar-fixed-top"
     },
     events: {
-      "submit form" : function(e) {
+      "submit form" : function() {
         this.collection.getActive().set({
           endpoint: this.$endpoint.val()
         }).request();
@@ -35,8 +36,9 @@ define([
     },
     endLoading: function() {
       this.loading--;
-      if(!this.loading)
+      if(!this.loading){
         window.clearInterval(this.loadingInterval);
+      }
     },
     animateLogo: function() {
       var ll = this.$(".ll"),
@@ -48,7 +50,7 @@ define([
       ur.toggleClass("ur lr");
       ul.toggleClass("ul ur");
     },
-    render: function(model, value) {
+    render: function(model) {
       model = model || this.collection.getActive();
       View.prototype.render.call(this, { model: model ? model.toJSON() : {} });
       this.$endpoint = this.$("input").typeahead({

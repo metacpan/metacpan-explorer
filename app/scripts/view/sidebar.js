@@ -1,8 +1,9 @@
 define([
+  "jquery",
   "view",
   "view/list-item",
   "tpl!template/sidebar.htm"
-], function(View, ItemView, template) {
+], function($, View, ItemView, template) {
   return View.extend({
     name: "sidebar",
     template: template,
@@ -26,9 +27,11 @@ define([
       View.prototype.render.call(this, {
         model: model ? model.toJSON() : null
       });
-      var $nav = this.$nav = this.$("ul.nav .examples");
+      var $nav = this.$("ul.nav .examples");
       this.collection.each(function(item) {
-        if(!item.id) return;
+        if(!item.id){
+          return;
+        }
         $nav.after(self.add(new ItemView({ model: item })).render().el);
       });
       return this;

@@ -1,4 +1,4 @@
-define(["backbone"], function(Backbone) {
+define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
   return Backbone.Model.extend({
     /**
      * Returns a human readable description of the model. It is used
@@ -19,7 +19,7 @@ define(["backbone"], function(Backbone) {
      * @param {options} options
      */
     setActive: function(options) {
-      if(!this.collection) return this;
+      if(!this.collection){ return this; }
       return this.collection.setActive(this, options);
     },
     /**

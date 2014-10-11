@@ -1,11 +1,13 @@
-define(["backbone"], function(Backbone) {
+define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
   return Backbone.View.extend({
     constructor: function(options) {
       options = options || {};
       var name = this.name || options.name;
       if(!this.template && name) {
         var template = $("#template-" + name).html();
-        if(template) this.template = _.template(template);
+        if(template){
+          this.template = _.template(template);
+        }
       }
       if(this.name && (!this.attributes || !this.attributes.class)) {
         this.attributes = _.extend(
@@ -13,10 +15,11 @@ define(["backbone"], function(Backbone) {
           { "class": name }
         );
       }
-      if(options.model)
+      if(options.model){
         this.listenTo(options.model, "change:active", function(model, value) {
           this.$el.toggleClass("active", value);
         });
+      }
       Backbone.View.apply(this, arguments);
     },
     triggerSelect: function() {
@@ -34,7 +37,7 @@ define(["backbone"], function(Backbone) {
       var args = arguments;
       _.each(this.views || [], function(view) {
         view.remove.apply(view, args);
-      })
+      });
       return Backbone.View.prototype.remove.apply(this, arguments);
     },
     removeViews: function() {
@@ -50,8 +53,12 @@ define(["backbone"], function(Backbone) {
         model: this.model ? this.model.toJSON() : {},
         collection: this.collection ? this.collection.toJSON() : []
       }, options || {});
-      if(template) this.$el.html(template(options));
-      if(this.model) this.$el.toggleClass("active", this.model.isActive());
+      if(template){
+        this.$el.html(template(options));
+      }
+      if(this.model){
+        this.$el.toggleClass("active", this.model.isActive());
+      }
       return this;
     }
   });

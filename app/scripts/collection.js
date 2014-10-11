@@ -20,7 +20,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
      * @return {App.Model}  Returns a model of one is active.
      */
     getActive: function() {
-      return this.find(function(model) { return model.isActive() });
+      return this.find(function(model) { return model.isActive(); });
     },
     /**
      * Calls fetch on all models and returns a $.Deferred object that resolves
@@ -30,10 +30,10 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
      */
     fetchAll: function() {
       var self = this;
-      return $.when.apply($, this.invoke("fetch")).pipe(function(){return self});
+      return $.when.apply($, this.invoke("fetch")).pipe(function(){ return self; });
     },
     sync: function(method, model, options) {
-      var store = this.store || this.model && this.model.prototype.store;
+      var store = this.store || (this.model && this.model.prototype.store);
       return store ? store.sync.apply(store, arguments) : $.when();
     },
     newModel: function(attributes, options) {
