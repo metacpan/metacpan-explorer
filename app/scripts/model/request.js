@@ -30,6 +30,9 @@ define(["jquery", "underscore", "model", "store/gist"], function($, _, Model, St
       });
     },
     request: function(options) {
+      // Notify that the request has been initiated.
+      this.trigger("pending", true);
+
       options = options || {};
       var self = this;
       var body = this.get("body");
@@ -51,6 +54,10 @@ define(["jquery", "underscore", "model", "store/gist"], function($, _, Model, St
         });
         return self;
       }).always(function(model) {
+        // Notify that request completed
+        // ("change:response" won't fire if the response text is the same).
+        model.trigger("pending", false);
+
         if(options.gist !== false && model.get("public") !== true){
           model.save();
         }

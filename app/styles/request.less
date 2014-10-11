@@ -84,3 +84,53 @@ div.response {
   }
 
 }
+
+.keyframes-transform(@name, @from, @to) {
+  @-moz-keyframes @name {
+    from { -moz-transform: @from; }
+    to   { -moz-transform: @to; }
+  }
+  @-webkit-keyframes @name {
+    from { -webkit-transform: @from; }
+    to   { -webkit-transform: @to; }
+  }
+  @-o-keyframes @name {
+    from { -o-transform: @from; }
+    to   { -o-transform: @to; }
+  }
+  @keyframes @name {
+    from { transform: @from; }
+    to   { transform: @to; }
+  }
+}
+.keyframes-transform(spin, rotate(0deg), rotate(360deg));
+
+.animation(@args) {
+     -moz-animation: @args;
+  -webkit-animation: @args;
+       -o-animation: @args;
+          animation: @args;
+}
+
+.response {
+  .indicator {
+    .animation(spin 2.5s 0s infinite linear normal);
+    .fitted-icon();
+    color: #888;
+    display: none;
+    padding: 1px;
+    position: absolute;
+    right: 50%;
+    top: 25%;
+    width: auto;
+    z-index: 10;
+  }
+  &.pending {
+    .indicator {
+      display: block;
+    }
+    pre code {
+      opacity: 0.5;
+    }
+  }
+}

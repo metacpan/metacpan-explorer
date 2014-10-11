@@ -41,6 +41,11 @@ define([
     },
 
     initialize: function() {
+      this.listenTo(this.model, {
+        // Use special pending event not only for the start, but also
+        // to ensure we get the event even if the response doesn't *change*.
+        "pending":          this.updatePendingIndicator
+      });
       this.listenTo(this.model, "change:response", this.updateResponse);
       this.listenTo(this.model, "change:body",     this.onChangeBody);
       this.listenTo(settings, 'change:editorFeatures',    this.onChangeEditorFeatures);
@@ -49,6 +54,9 @@ define([
       this.listenTo(settings, 'change:instantValidation', this.onChangeInstantValidation);
     },
 
+    updatePendingIndicator: function (pending) {
+      this.$resbox.toggleClass('pending', pending);
+    },
     updateResponse: function() {
       var res = _.escape(this.model.get("response"));
       this.$response.html(res);
@@ -61,6 +69,7 @@ define([
       View.prototype.render.apply(this, arguments);
       this.$label = this.$(".editor .label").hide();
       this.$body = this.$("textarea");
+      this.$resbox   = this.$('.response');
       this.$response = this.$('pre code');
 
       this.setEditorFeatures(settings.get('editorFeatures'));
