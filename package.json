@@ -8,5 +8,8 @@
     "clean-css": ">=2.2",
     "less":      ">=1.7.5",
     "requirejs": ">=2.1.15"
+  },
+  "optionalDependencies": {
+    "node-static": "x"
   }
 }
