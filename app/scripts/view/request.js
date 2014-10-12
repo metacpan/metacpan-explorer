@@ -44,14 +44,16 @@ define([
       this.listenTo(this.model, {
         // Use special pending event not only for the start, but also
         // to ensure we get the event even if the response doesn't *change*.
+        "change:response":  this.updateResponse,
+        "change:body":      this.onChangeBody,
         "pending":          this.updatePendingIndicator
       });
-      this.listenTo(this.model, "change:response", this.updateResponse);
-      this.listenTo(this.model, "change:body",     this.onChangeBody);
-      this.listenTo(settings, 'change:editorFeatures',    this.onChangeEditorFeatures);
-      this.listenTo(settings, 'change:highlightResponse', this.updateResponse);
-      this.listenTo(settings, 'change:wrapLines',         this.onChangeWrapLines);
-      this.listenTo(settings, 'change:instantValidation', this.onChangeInstantValidation);
+      this.listenTo(settings, {
+        'change:editorFeatures':    this.onChangeEditorFeatures,
+        'change:highlightResponse': this.updateResponse,
+        'change:wrapLines':         this.onChangeWrapLines,
+        'change:instantValidation': this.onChangeInstantValidation
+      });
     },
 
     updatePendingIndicator: function (pending) {
