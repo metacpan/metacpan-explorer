@@ -1,0 +1,2 @@
+The contents of `inc` were moved to `app/inc` including this submodule.
+Run `git submodule update --init` and ignore this directory.
