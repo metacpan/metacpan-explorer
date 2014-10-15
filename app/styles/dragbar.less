@@ -1,0 +1,46 @@
+.request {
+  // Position the outer .dragbar with the percentage so its between the two
+  // areas, then relative position the child .handle so that it can be large
+  // enough to grab, but overall the draggable element seems "in the middle".
+  // Leave the style as a single pixel bar; Make the handle wider so its easier
+  // to grab but leave it transparent so the single pixel bar shows through.
+  .dragbar {
+    background: transparent;
+    left: 50%;
+    position: absolute;
+    width: 1px;
+    z-index: 10;
+
+    &, .handle {
+      border: 0;
+      bottom: 0;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .handle {
+      // ...but don't use background:transparent as that makes IE act like it's
+      // smaller than it is... so fake it with a translucent white.
+      background: #fff;
+      opacity: 0;
+      cursor: col-resize;
+      left: -5px;
+      position: relative;
+      width: 9px;
+    }
+  }
+}
+
+.user-select (@val) {
+     -moz-user-select: @val;
+     -moz-user-select: -moz-@val;
+   -khtml-user-select: @val;
+  -webkit-user-select: @val;
+      -ms-user-select: @val;
+          user-select: @val;
+}
+// Don't select text while dragging.
+body.dragging * {
+  .user-select(none);
+}

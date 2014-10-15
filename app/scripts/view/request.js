@@ -1,12 +1,13 @@
 define([
   "underscore",
   "view",
+  "view/dragbar",
   "settings",
   "behave",
   "highlight",
   "tpl!template/request.htm",
   "bootstrap-dropdown"
-], function(_, View, settings, Behave, hljs, template) {
+], function(_, View, DragBar, settings, Behave, hljs, template) {
   /*jslint unparam: true*/ // A lot of event callbacks in here.
   return View.extend({
     name: "request",
@@ -73,6 +74,13 @@ define([
       this.$body = this.$("textarea");
       this.$resbox   = this.$('.response');
       this.$response = this.$('pre code');
+
+      this.dragbar = (new DragBar({
+        container: this.$('.request-inner'),
+        left:  this.$('.editor'),
+        right: this.$resbox,
+        el:    this.$('.dragbar')
+      })).render();
 
       this.setEditorFeatures(settings.get('editorFeatures'));
       this.setWrapLines(settings.get('wrapLines'));
