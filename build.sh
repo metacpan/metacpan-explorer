@@ -1,7 +1,7 @@
 #!/bin/sh
 
 npm install
-export PATH=node_modules/.bin:$PATH
+export PATH=`npm bin || echo node_modules/.bin`:$PATH
 
 r.js -o app.build.js
 lessc --clean-css app/styles/main.less > build/styles.css
