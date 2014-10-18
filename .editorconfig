@@ -15,3 +15,8 @@ charset     = utf-8
 
 trim_trailing_whitespace = true
 insert_final_newline     = true
+
+# Don't mess with stuff in inc.
+[app/inc/**]
+trim_trailing_whitespace = false
+insert_final_newline     = false
