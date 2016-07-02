@@ -12,7 +12,7 @@ define(["jquery", "underscore", "model", "store/gist"], function($, _, Model, St
       var curl = "curl " + (this.get("body") ? "-XPOST " : "") +
         "'api.metacpan.org" + this.get("endpoint") + "'";
       if(this.get("body")){
-        curl += " -d \"$(curl -Ls gist.github.com/metacpan/" + this.id + "/raw/body.json)\"";
+        curl += " -d \"$(curl -Ls gist.github.com/" + this.store.config.user + "/" + this.id + "/raw/body.json)\"";
       }
       return curl;
     },

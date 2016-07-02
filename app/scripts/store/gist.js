@@ -2,8 +2,12 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
 
   var Storage = function() { return; };
   _.extend(Storage.prototype, Backbone.Events, {
+    config: {
+      user: 'metacpan-user',
+      token: github_token()
+    },
     request: function(options) {
-      options.url += "?access_token=62ac27f3962648d0e158992cbaa3cc3bd8562995";
+      options.url += "?access_token=" + this.config.token;
       return $.ajax(options);
     },
     find: function(model, options) {
@@ -15,7 +19,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
     },
     findAll: function() {
       return $.ajax({
-        url: "https://api.github.com/users/metacpan/gists",
+        url: "https://api.github.com/users/" + this.config.user + "/gists",
         context: this,
         dataType: "json"
       });
