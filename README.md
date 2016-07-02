@@ -17,7 +17,7 @@ In the project root run
 It will install dependencies via npm
 and regenerate the static files into the `build` directory.
 
-The [developer vm](https://github.com/CPAN-API/metacpan-developer)
+The [developer vm](https://github.com/metacpan/metacpan-developer)
 has everything you need for this.
 
 To run it somewhere else you'll need to make sure you have
@@ -25,7 +25,7 @@ To run it somewhere else you'll need to make sure you have
 
 ## Adding Examples
 
-Login using the credentials from https://github.com/CPAN-API/metacpan-credentials/blob/master/github and go to https://gist.github.com/.
+Login using the credentials from https://github.com/metacpan/metacpan-credentials/blob/master/github and go to https://gist.github.com/.
 Create a new **public** gist with the following file structure:
 
 * endpoint.txt

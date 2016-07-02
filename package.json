@@ -2,7 +2,7 @@
   "//": "Define repository to silence npm warning.",
   "repository": {
     "type": "git",
-    "url": "http://github.com/CPAN-API/metacpan-explorer"
+    "url": "http://github.com/metacpan/metacpan-explorer"
   },
   "devDependencies": {
     "clean-css": ">=2.2",
