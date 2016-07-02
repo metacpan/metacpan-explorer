@@ -23,6 +23,11 @@ has everything you need for this.
 To run it somewhere else you'll need to make sure you have
 [node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
+## Running the development server
+
+You can run `node server.js` (or `npm start`) to launch a dev server.
+See the comments in `server.js` for additional instructions.
+
 ## Adding Examples
 
 Login using the credentials from https://github.com/metacpan/metacpan-credentials/blob/master/github and go to https://gist.github.com/.

@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// NOTE: You should get the github token from the private conf repo
+// and export it as GITHUB_TOKEN before running this server.
+
 var fs = require('fs');
 var Static = require('node-static');
 
@@ -15,7 +18,13 @@ var startServer = function(dir, port) {
   require('http').createServer(function (request, response) {
     request.addListener('end', function () {
 
-      httpd.serve(request, response);
+      if (request.url === '/github.js') {
+        response.writeHead(200, {'Content-Type': 'text/javascript'});
+        response.end('function github_token () { return ' + JSON.stringify(process.env.GITHUB_TOKEN || 'token') + '; }');
+      }
+      else {
+        httpd.serve(request, response);
+      }
 
     }).resume();
   }).listen(port);
