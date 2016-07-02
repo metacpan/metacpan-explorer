@@ -6,9 +6,9 @@ process.stdin.on("end", function(){
   process.stdout.write(
     text
       .replace(/\{\{bust\}\}/g, bust)
-      .replace(/(?:<!--\s+)?\{\{(dev|build)\}\}((?:.|\n)+?)?\{\{\/\1\}\}(?:\s+-->)?/g, function(){
+      .replace(/(?:<!--\s+)?\{\{(dev|build)\}\}((?:.|\n)+?)?\{\{\/\1\}\}(?:\s+-->)?/g, function(_, env, content){
         // Enable the contents of the 'build' sections and remove the 'dev' sections.
-        return RegExp.$1 == 'build' ? RegExp.$2 : '';
+        return env === 'build' ? content : '';
       })
       // Remove any remaining blank lines.
       .replace(/\n{2,}/g, "\n")
