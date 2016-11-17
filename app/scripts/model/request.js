@@ -10,7 +10,7 @@ define(["jquery", "underscore", "model", "store/gist"], function($, _, Model, St
     getCurl: function() {
       if(!this.get("endpoint")){ return ""; }
       var curl = "curl " + (this.get("body") ? "-XPOST " : "") +
-        "'api.metacpan.org" + this.get("endpoint") + "'";
+            "'https://fastapi.metacpan.org" + this.get("endpoint") + "'";
       if(this.get("body")){
         curl += " -d \"$(curl -Ls gist.github.com/" + this.store.config.user + "/" + this.id + "/raw/body.json)\"";
       }
@@ -37,7 +37,7 @@ define(["jquery", "underscore", "model", "store/gist"], function($, _, Model, St
       var self = this;
       var body = this.get("body");
       return $.ajax({
-        url: "//api.metacpan.org" + this.get("endpoint"),
+        url: "https://fastapi.metacpan.org" + this.get("endpoint"),
         dataType: "text",
         type: (body ? "POST" : "GET"),
         data: (body || null)
