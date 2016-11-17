@@ -35,7 +35,7 @@ Create a new **public** gist with the following file structure:
 
 * endpoint.txt
 
-Contains the path to the API endpoint (e.g. `/v0/author/_search`)
+Contains the path to the API endpoint (e.g. `/v1/author/_search`)
 
 * body.json
 
