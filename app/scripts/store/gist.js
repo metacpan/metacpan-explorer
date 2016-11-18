@@ -7,7 +7,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       token: github_token()
     },
     request: function(options) {
-      options.url += "?access_token=" + this.config.token;
+        //options.url += "?access_token=" + this.config.token;
       return $.ajax(options);
     },
     find: function(model, options) {

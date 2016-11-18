@@ -55,13 +55,13 @@ define([
       View.prototype.render.call(this, { model: model ? model.toJSON() : {} });
       this.$endpoint = this.$("input").typeahead({
         source: [
-          "/v0/file",
-          "/v0/author",
-          "/v0/release",
-          "/v0/distribution",
-          "/v0/module",
-          "/v0/favorite",
-          "/v0/rating"
+          "/v1/file",
+          "/v1/author",
+          "/v1/release",
+          "/v1/distribution",
+          "/v1/module",
+          "/v1/favorite",
+          "/v1/rating"
         ]
       });
       this.$("button").tooltip({ placement: "bottom", trigger: "hover", container: "body" });
