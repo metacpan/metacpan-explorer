@@ -16,7 +16,7 @@ define([
     item: function() {
       return [
         '<li class="list-group-item"><label>',
-        _.toArray(arguments).join(''),
+        _.toArray(arguments).join(' '),
         '</label></li>'
       ].join('');
     }

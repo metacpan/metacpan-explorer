@@ -438,7 +438,7 @@
 
                 if(!utils.fenceRange()){ return; }
 
-                if (e.keyCode == 13 && e.shiftKey !== true) {
+                if (e.keyCode == 13 && e.shiftKey !== true) { // NOTE: EDITED
 
                     utils.preventDefaultEvent(e);
                     utils._callHook('enter:before');

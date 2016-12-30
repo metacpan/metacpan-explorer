@@ -12,9 +12,15 @@ define([
   return View.extend({
     name: "request",
     template: template,
+
     events: {
       "keydown textarea": function(e) {
         // Shift + Enter to send request.
+        // NOTE: Our copy of behave has an edit on line 441 to disable behave's
+        // enterKey functionality when shift is pressed.
+        // Behave offers hooks for keydown as well as enter:before but they both
+        // fire after behave's enterKey function has started, so I think it's
+        // too late... I think we're stuck with the edit.
         if((e.keyCode || e.which) === 13 && e.shiftKey === true) {
           this.model.request();
           return false;
