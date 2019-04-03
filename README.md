@@ -8,7 +8,24 @@ so after cloning (or pulling) make sure your submodule is up to date:
 
     git submodule init && git submodule update
 
-## Rebuilding the static files
+## Docker Development
+
+###Build an image:
+
+`docker build -t metacpan/explorer-web-app .`
+
+###Run your image:
+
+`docker run -p 8080:8080 -d metacpan/explorer-web-app`
+
+###View in your browser:
+
+http://localhost:8080/
+
+
+## Dockerless Development
+
+### Rebuilding the static files
 
 In the project root run
 
