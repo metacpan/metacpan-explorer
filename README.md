@@ -8,7 +8,24 @@ so after cloning (or pulling) make sure your submodule is up to date:
 
     git submodule init && git submodule update
 
-## Rebuilding the static files
+## Docker Development
+
+###Build an image:
+
+`docker build -t metacpan/explorer-web-app .`
+
+###Run your image:
+
+`docker run -p 8080:8080 -d metacpan/explorer-web-app`
+
+###View in your browser:
+
+http://localhost:8080/
+
+
+## Dockerless Development
+
+### Rebuilding the static files
 
 In the project root run
 
@@ -23,14 +40,14 @@ has everything you need for this.
 To run it somewhere else you'll need to make sure you have
 [node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
-## Running the development server
+### Running the development server
 
 You can run `node server.js` (or `npm start`) to launch a dev server.
 See the comments in `server.js` for additional instructions.
 
 ## Adding Examples
 
-Login using the credentials from https://github.com/metacpan/metacpan-credentials/blob/master/github and go to https://gist.github.com/.
+Log in using the credentials from https://github.com/metacpan/metacpan-credentials/blob/master/github and go to https://gist.github.com/.
 Create a new **public** gist with the following file structure:
 
 * endpoint.txt
