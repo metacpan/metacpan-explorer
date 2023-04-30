@@ -1,0 +1,23 @@
+---
+name: Build deployment container
+on:
+  push:
+    branches:
+      - prod
+      - staging
+  workflow_dispatch:
+jobs:
+  docker:
+    runs-on: ubuntu-22.04
+    name: Docker Push
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker build
+        run: docker build . -t metacpan/metacpan-explorer:$GITHUB_SHA
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Push build to Docker hub
+        run: docker push metacpan/metacpan-explorer:$GITHUB_SHA

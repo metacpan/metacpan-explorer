@@ -1,22 +1,24 @@
-metacpan-explorer
-=================
+# metacpan-explorer
 
-## Updating Submodules
+## Clone
 
 This repo includes Bootstrap as a submodule,
 so after cloning (or pulling) make sure your submodule is up to date:
 
-    git submodule init && git submodule update
+```
+git clone https://github.com/metacpan/metacpan-explorer.git
+git submodule init && git submodule update
+```
 
 ## Docker Development
 
 ###Build an image:
 
-`docker build -t metacpan/explorer-web-app .`
+`docker build -t metacpan/metacpan-explorer .`
 
 ###Run your image:
 
-`docker run -p 8080:8080 -d metacpan/explorer-web-app`
+`docker run -p 8080:8080 metacpan/metacpan-explorer`
 
 ###View in your browser:
 
