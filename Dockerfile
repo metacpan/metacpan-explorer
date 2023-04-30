@@ -7,6 +7,6 @@ WORKDIR /usr/src/app
 # Bundle app source
 COPY . .
 
-RUN npm install
+RUN npm install --verbose
 
 CMD [ "npm", "start" ]
